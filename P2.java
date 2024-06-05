@@ -1,64 +1,100 @@
-import java.util.ArrayList;
 
-public class P2 {
+
+
+
+public class P2{
     public static void main(String[] args) {
-        MinStack minStack = new MinStack();
-        minStack.push(0);
-        minStack.push(1);
-        minStack.push(2);
-        minStack.push(3);
-        minStack.push(4);
+        String[] oprations= {"MinStack","push","push","push","getMin","pop","top","getMin"};
+        String[] values = {"[]","-2","0","-3","[]","[]","[]","[]"};
+        String[] ans = new String[oprations.length];
+        int i = 0;
+        MinStack ms = new MinStack();
+        for (String string : oprations) {
+            switch (string) {
+                case "MinStack":
+                     ms = new MinStack();
+                     ans[i] = "null";
+                     i++;
+                     break;
+                case "push":
+                    ms.push(Integer.parseInt(values[i]));
+                    ans[i] = "null";
+                    i++;
+                    break;
+                case "pop":
+                    ms.pop();
+                    ans[i] = "null";
+                    i++;
+                    break;
+                case "top":
+                    ans[i] = ms.top() + "";  
+                    i++;
+                    break;
+                case "getMin":
+                    ans[i] = ms.getMin()+"";
+                    i++;
+                    break;
+                default:
+                    throw new AssertionError();
 
-        System.out.println("Top element: " + minStack.top());
-        System.out.println("Minimum element: " + minStack.getMin());
+                    
+            }
+        }
+        System.out.print("oprations : [");
+        for (String string : oprations) {
+            System.out.print(string + ",");
+            string = string.substring(0, string.length() - 1);  // Remove the last character
+            
+        }
+        System.out.println("]");
 
-        minStack.pop();
-        System.out.println("After popping:");
-        System.out.println("Top element: " + minStack.top());
-        System.out.println("Minimum element: " + minStack.getMin());
+        System.out.print("values : [");
+        for (String string : values) {
+            System.out.print(string +",");
+            string =  string.substring(0,string.length() -1);
+            
+        }
+        System.out.println("]");
+         System.out.print("Output    : [");
+        for (String string : ans) {
+            System.out.print(string + ",");
+            if (string.endsWith(",")) {
+                string = string.substring(0, string.length() - 1);  // Remove the last character
+            }
+        }
+        System.out.println("]");
+   
+
     }
 }
+ class MinStack{
+    int top = -1;
+    int[] st = new int[200];
 
-class MinStack {
-    private ArrayList<int[]> stack;
-
-    public MinStack() {
-        stack = new ArrayList<>();
+    public void push(int n){
+        top++;
+        st[top] = n;
     }
 
-    public void push(int val) {
-        if (stack.size() == 0) {
-            stack.add(new int[] { val, val });
-        } else {
-            int min = getMin();
-            stack.add(new int[] { val, Math.min(min, val) });
-        }
+    public int  top(){
+        return st[top];
     }
 
-    public void pop() {
-        if (!stack.isEmpty()) {
-            stack.remove(stack.size() - 1);
-        }
+    public void pop(){
+        int t = st[top];
+        top--;
     }
 
-    public int top() {
-        if (!stack.isEmpty()) {
-            return stack.get(stack.size() - 1)[0];
-        }
-        return -1;
-    }
+    public int  getMin(){
+        int min = st[0];
+        for(int i=0;i<=top;i++){
+            if(min>st[i]){
+                min = st[i];
 
-    public int getMin() {
-        if (!stack.isEmpty()) {
-            return stack.get(stack.size() - 1)[1];
+            }
+           
         }
-        return -1;
-    }
-
-    void printStack() {
-        for (int[] entry : stack) {
-            System.out.println("Value: " + entry[0] + ", Min: " + entry[1]);
-        }
+        return min;
     }
 
 }
