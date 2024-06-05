@@ -5,7 +5,7 @@ public class P5{
         System.out.print("entre a binary number:");
         String binary = sc.nextLine();
         double decimal  = binaryToDecimal(binary);
-        System.out.println(decimal);
+        System.out.println("decimal value of binary:"+decimal);
 
     }
     static double binaryToDecimal(String binary){
@@ -22,6 +22,7 @@ public class P5{
                 fractionalvalue += Math.pow(2, -(i+1));
             }
         }
+
 
        double decimalValue = intValue + fractionalvalue ;
         return decimalValue; 

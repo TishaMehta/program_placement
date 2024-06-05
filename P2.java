@@ -58,7 +58,7 @@ public class P2{
                 string = string.substring(0, string.length() - 1);  // Remove the last character
             }
         }
-        System.out.println("]");
+        System.out.println(" ]");
    
 
     }
