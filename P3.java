@@ -8,7 +8,7 @@ public class P3{
         int n = sc.nextInt();
         int ans = 1;
         int count =0;
-        intbjrvk
+        
         for (int i = n; i>=1; i--) {
             ans = ans*i;
         }
